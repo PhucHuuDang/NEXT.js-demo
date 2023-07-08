@@ -22,4 +22,4 @@ const userSchema = new Schema(
     { timestamps: true }
 );
 // if the User collection does not exist create new one
-export default mongoose.models.User || model("User", userSchema);
+export default mongoose.models.User || mongoose.model("User", userSchema);

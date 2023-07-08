@@ -1,11 +1,42 @@
 "use client";
 
+import { useState } from "react";
 import styles from "./page.module.css";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+
 function Register() {
-    const handleSubmit = (e) => {
+    const [error, setError] = useState(false);
+    const router = useRouter();
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        // take the value of the first input
         const name = e.target[0].value;
+        const email = e.target[1].value;
+        const password = e.target[2].value;
+
+        try {
+            const res = await fetch("/api/auth/register", {
+                method: "POST",
+                headers: {
+                    "content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    name,
+                    email,
+                    password,
+                }),
+            });
+
+            res.status === 201 &&
+                router.push(
+                    "/dashboard/login?success=Account has been created"
+                );
+        } catch (err) {
+            setError(err);
+            console.log(err);
+        }
     };
 
     return (
@@ -30,7 +61,9 @@ function Register() {
                     required
                 />
                 <button className={styles.button}>Register</button>
+                {error && "Something went wrong"}
             </form>
+            <span className={styles.or}>- OR -</span>
             <Link href="/dashboard/login">Login with an existing account</Link>
         </div>
     );
