@@ -6,8 +6,10 @@ import bcrypt from "bcryptjs";
 export const POST = async (request) => {
     const { name, email, password } = await request.json();
 
+    // connect with db
     await connect();
 
+    // hash password before save in mongodb
     const hashPassword = await bcrypt.hash(password, 5);
 
     const newUser = new User({
