@@ -16,7 +16,6 @@ const handler = NextAuth({
             name: "Credentials",
             async function(credentials) {
                 await connect();
-
                 try {
                     // this user in the db
                     const user = await User.findOne({
