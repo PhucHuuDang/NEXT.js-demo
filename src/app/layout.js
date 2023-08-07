@@ -15,7 +15,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
     return (
-        <html lang="en">
+        <html lang="en" suppressHydrationWarning>
             {/* Error: Hydration failed because the initial UI does not match what was rendered on the server.
             Warning: Expected server HTML to contain a matching <h1> in <html>. got this error cause put h1 outside body part
  */}

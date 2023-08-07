@@ -4,6 +4,7 @@ import { signIn } from "next-auth/react";
 import styles from "./page.module.css";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+
 function Login() {
     const session = useSession();
     const router = useRouter();
@@ -42,7 +43,12 @@ function Login() {
                 <button className={styles.button}>Login</button>
                 {/* {error && "Something went wrong"} */}
             </form>
-            <button onClick={() => signIn("google")}>Login with Google</button>
+            <button
+                className={styles.googleLog}
+                onClick={() => signIn("google")}
+            >
+                Login with Google
+            </button>
         </div>
     );
 }

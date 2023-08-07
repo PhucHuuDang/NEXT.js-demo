@@ -21,7 +21,6 @@ const handler = NextAuth({
                     const user = await User.findOne({
                         email: credentials.email,
                     });
-
                     if (user) {
                         const isPasswordCorrect = await bcrypt.compare(
                             credentials.password,
